@@ -1,0 +1,8 @@
+mkdir fastqc_output
+#build a mew directory called xxxxxx
+
+#run fastqc
+fastqc -o fastqc_output /localdisk/data/BPSM/Assignment1/fastq/216_L8_1.fq.gz 
+
+echo "216_L8_1 finished"
+#then print to tell us that fastqc successfully finished
