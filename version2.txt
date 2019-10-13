@@ -1,0 +1,32 @@
+mkdir fastqc_output
+#build a mew directory called xxxxxx
+
+#run fastqc
+fastqc -o fastqc_output /localdisk/data/BPSM/Assignment1/fastq/216_L8_1.fq.gz 
+
+echo "216_L8_1 finished"
+#then print to tell us that fastqc successfully finished
+
+cd fastqc_output
+
+ls -al
+#show us all the quality check results
+
+cd -
+#go back to last repository
+
+
+mkdir bowtie2_output
+
+cd bowtie2_output
+
+#unzip files and build template before running bowtie2
+
+cp /localdisk/data/BPSM/Assignment1/Tbb_genome/Tb927_genome.fasta.gz .
+#copy the file to this repository
+
+gunzip Tb927_genome.fasta.gz
+#unzip the file
+
+#build index of template
+bowtie2-build Tb927_genome.fasta index
