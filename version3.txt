@@ -1,0 +1,50 @@
+mkdir fastqc_output
+#build a mew directory called xxxxxx
+
+#run fastqc
+fastqc -o fastqc_output /localdisk/data/BPSM/Assignment1/fastq/216_L8_1.fq.gz 
+
+echo "216_L8_1 finished"
+#then print to tell us that fastqc successfully finished
+
+cd fastqc_output
+
+ls -al
+#show us all the quality check results
+
+cd -
+#go back to last repository
+
+
+mkdir bowtie2_output
+
+cd bowtie2_output
+
+#unzip files and build template before running bowtie2
+
+cp /localdisk/data/BPSM/Assignment1/Tbb_genome/Tb927_genome.fasta.gz .
+#copy the file to this repository
+
+gunzip Tb927_genome.fasta.gz
+#unzip the file
+
+#build index of template
+bowtie2-build Tb927_genome.fasta index
+
+
+
+
+bowtie2 -x index -1 /localdisk/data/BPSM/Assignment1/fastq/216_L8_1.fq.gz -2 /localdisk/data/BPSM/Assignment1/fastq/216_L8_2.fq.gz -S 216.sam
+mkdir Tbbgenes_bed
+
+cd Tbbgenes_bed
+
+
+#copy files 
+cp /localdisk/data/BPSM/Assignment1/Tbbgenes.bed .
+cp /localdisk/home/s1919406/assignment/bowtie2_output/216.sam .
+
+
+samtools view -bS 216.sam > 216.bam 
+samtools sort 216.bam -o 216
+samtools index -b 216
